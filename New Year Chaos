@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+void minimumBribes(int q_count, int* q) {
+    int bribes = 0;
+
+    for (int i = 0; i < q_count; i++) {
+        int p = q[i];
+
+        // Check if too chaotic
+        if (p - (i + 1) > 2) {
+            printf("Too chaotic\n");
+            return;
+        }
+
+        // Count bribes from people ahead of p
+        for (int j = (p - 2 > 0 ? p - 2 : 0); j < i; j++) {
+            if (q[j] > p) {
+                bribes++;
+            }
+        }
+    }
+
+    printf("%d\n", bribes);
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        int q[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &q[i]);
+        }
+        minimumBribes(n, q);
+    }
+
+    return 0;
+}
